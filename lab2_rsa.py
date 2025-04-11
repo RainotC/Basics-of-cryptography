@@ -1,7 +1,7 @@
 import sympy
 import random
 import math
-import string
+
 
 def generate_good_prime(prime_min, prime_max): #good meaning 4 mod 3
     return sympy.randprime(prime_min, prime_max)
@@ -42,7 +42,6 @@ def calculate_keys(prime_min, prime_max):
     d = generate_d(e, phi, n)
 
     return n, e, d
-
 def check_if_same(message, deciphered):
     for i in range(len(message)):
         if message[i] != deciphered[i]:
@@ -50,18 +49,13 @@ def check_if_same(message, deciphered):
     return True
 
 def task():
-    n, e, d =calculate_keys(1000, 9999)
+    n, e, d = calculate_keys(1000, 9999)
     message = create_random_message(50)
     print("Message: ", message)
     cyphered = cypher(e, n, message)
     print("Cyphered: ", cyphered)
     deciphered = decipher(d, n, cyphered)
     print("Deciphered: ", deciphered)
-
-    if check_if_same(message, deciphered):
-        print("Success")
-    else:
-        print("Fail")
-
+    print("Same: ", check_if_same(message, deciphered))
 
 task()
